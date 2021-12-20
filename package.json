@@ -1,0 +1,24 @@
+{
+    "name": "opal",
+    "version": "1.0.0",
+    "description": "Bot v13 (communautaire)",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DarekaSama/Opal_BotDiscord.git"
+    },
+    "keywords": [],
+    "author": "Dr_AtsiSama",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DarekaSama/Opal_BotDiscord/issues"
+    },
+    "homepage": "https://github.com/DarekaSama/Opal_BotDiscord#readme",
+    "dependencies": {
+        "discord.js": "^13.0.0",
+        "discord-akairo": "github:SkyBlockDev/discord-akairo"
+    }
+}
