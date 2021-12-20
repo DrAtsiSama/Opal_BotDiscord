@@ -1,4 +1,4 @@
-const { AkairoClient, CommandHandler } = require('discord-akairo');
+const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akairo');
 const { Presence } = require('discord.js');
 module.exports = class GotoClient extends AkairoClient {
     constructor(config = {}) {
@@ -18,15 +18,20 @@ module.exports = class GotoClient extends AkairoClient {
                         //url : 'url'
                     }]
                 },
-                intents: 32767 //indique les événements que l'on peut recevoir (intents calculator ou écrire à la main)
+                intents: 32767 //Indique les événements que l'on peut recevoir (intents calculator ou écrire à la main)
             }
         );
         this.CommandHandler = new CommandHandler(this, {
             allowMention: true,
             prefix: config.prefix,
             defaultCooldown: 2000, // 2000 ms => 2s
-            directory: './src/commands' //ou se trouve les commandes
-        }); //creation du handler
-        this.CommandHandler.loadAll();
+            directory: './src/commands' //Localisation des commandes
+        }); //Creation du handler
+        this.listenerHandler = new ListenerHandler(this, {
+            directory: './src/listeners',
+        }); //Creation des événements
+        this.CommandHandler.loadAll(); //Chargement des commandes
+        this.CommandHandler.useListenerHandler(this.listenerHandler); //Execute listenerHandler
+        this.listenerHandler.loadAll(); //Chargement des événements
     }
 }
