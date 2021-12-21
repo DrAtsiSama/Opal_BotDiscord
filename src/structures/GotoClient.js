@@ -1,5 +1,5 @@
+const { embed } = require('../util/functions');
 const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akairo');
-const { Presence } = require('discord.js');
 module.exports = class GotoClient extends AkairoClient {
     constructor(config = {}) {
         super( //options du client
@@ -30,6 +30,10 @@ module.exports = class GotoClient extends AkairoClient {
         this.listenerHandler = new ListenerHandler(this, {
             directory: './src/listeners',
         }); //Creation des événements
+        //Creation des variables globales
+        this.functions = {
+            embed: embed //this.client.functions.embed*
+        }
         this.CommandHandler.loadAll(); //Chargement des commandes
         this.CommandHandler.useListenerHandler(this.listenerHandler); //Execute listenerHandler
         this.listenerHandler.loadAll(); //Chargement des événements
