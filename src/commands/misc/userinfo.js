@@ -12,7 +12,7 @@ class UserInfoCommand extends Command {
             ratelimit: 2, //Nombre d'utilisation avant que le cooldown se lance
             cooldown: 5000, //5000ms => 5s
             typing: true, //Simule l'écriture du bot
-            ownerOnly: false, //Seul le(s) propriétaire(s) du bot ont la permission d'utiliser la commande (par defaut false)
+            ownerOnly: true, //Seul le(s) propriétaire(s) du bot ont la permission d'utiliser la commande
             channel: 'guild', //guild ou dm le message s'enverra soit sur le discord soit en privé
             args: [
                 { id: 'member', type: 'member', default: message => message.member } //Personne mentionné ou soit par defaut
