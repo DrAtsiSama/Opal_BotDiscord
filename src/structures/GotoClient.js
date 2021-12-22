@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akairo');
 const { TOKEN, MONGOSTRING } = require('../util/config');
+const { GuildsProvider } = require('../structures/Providers');
 const { embed } = require('../util/functions');
 module.exports = class GotoClient extends AkairoClient {
     constructor(config = {}) {
@@ -25,7 +26,11 @@ module.exports = class GotoClient extends AkairoClient {
             );
             this.CommandHandler = new CommandHandler(this, {
                 allowMention: true,
-                prefix: config.prefix,
+                prefix: async message => {
+                    const guildPrefix = await this.guildSettings.get(message.guild);
+                    if (guildPrefix) return guildPrefix.prefix;
+                    return config.prefix;
+                },
                 defaultCooldown: 2000, // 2000 ms => 2s
                 directory: './src/commands' //Localisation des commandes
             }); //Creation du handler
@@ -36,6 +41,7 @@ module.exports = class GotoClient extends AkairoClient {
             this.functions = {
                 embed: embed //this.client.functions.embed*
             }
+            this.guildSettings = new GuildsProvider();
         } //Constructor
         /*Base de Données*/
     init() {
