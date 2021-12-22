@@ -15,8 +15,8 @@ class HelpCommand extends Command {
             }
         });
     }
-    exec(message, args) {
-            const prefix = this.handler.prefix;
+    async exec(message, args) {
+            const prefix = await this.handler.prefix(message);
             const command = args.command;
             if (!command) {
                 let embed = this.client.functions.embed()
@@ -53,7 +53,7 @@ class HelpCommand extends Command {
       return message.channel.send(stripIndents
         `
         \`\`\`makefile
-        [help: Commande -> ${command.aliases[0]}] ${command.ownerOnly ? '⚠️ Commande utilisable seulement par les Administrateurs ⚠️' : '' }
+        [help: Commande -> ${command.aliases[0]}] ${command.ownerOnly ? '[!] Commande utilisable seulement par les Administrateurs [!]' : '' }
         ------------
         ${command.description.content}
         Utilisation: ${prefix}${command.description.usage}
