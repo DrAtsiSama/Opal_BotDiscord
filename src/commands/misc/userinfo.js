@@ -2,6 +2,7 @@ const { Command } = require('discord-akairo');
 class UserInfoCommand extends Command {
     constructor() {
         super('userinfo', {
+            category: 'Misc',
             aliases: ['userinfo', 'info'],
             /*Arguments*/
             ignoreCooldown: '213230950853640193', //outpasse les cooldowns
@@ -11,11 +12,16 @@ class UserInfoCommand extends Command {
             ratelimit: 2, //Nombre d'utilisation avant que le cooldown se lance
             cooldown: 5000, //5000ms => 5s
             typing: true, //Simule l'écriture du bot
-            ownerOnly: true, //Seul le(s) propriétaire(s) du bot ont la permission d'utiliser la commande
+            ownerOnly: false, //Seul le(s) propriétaire(s) du bot ont la permission d'utiliser la commande (par defaut false)
             channel: 'guild', //guild ou dm le message s'enverra soit sur le discord soit en privé
             args: [
                 { id: 'member', type: 'member', default: message => message.member } //Personne mentionné ou soit par defaut
-            ]
+            ],
+            description: {
+                content: `Affiche les informations de l'utilisateur.`,
+                usage: 'user(info) <membre>',
+                exemples: ['userinfo', 'info @member']
+            }
         });
     }
     exec(message, args) {

@@ -2,6 +2,7 @@ const { Command } = require('discord-akairo');
 class TArgsMessageCommand extends Command {
     constructor() {
         super('targsmessage', {
+            category: 'Misc',
             aliases: ['targsmessage', 'tmes'],
             /*Arguments*/
             ignoreCooldown: '213230950853640193', //outpasse les cooldowns
@@ -20,7 +21,12 @@ class TArgsMessageCommand extends Command {
                 { id: 'troisiemeArgs', match: 'content' } //retourne le contenue du message
 
             ],
-            separator: '|' //Le separateur donné sera attendu entre les arguments
+            separator: '|', //Le separateur donné sera attendu entre les arguments
+            description: {
+                content: `Retourne les arguments d'une phrase.`,
+                usage: 'targsmessage <args>',
+                exemples: ['targsmessage <args>']
+            }
         });
     }
     exec(message, args) {

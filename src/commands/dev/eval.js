@@ -14,7 +14,12 @@ module.exports = class EvalCommand extends Command {
             args: [{
                 id: 'code',
                 match: 'content',
-            }, ],
+            }],
+            description: {
+                content: `Execute du code en JavaScript.`,
+                usage: 'eval <code>',
+                exemples: ['eval <code>']
+            }
         });
     }
     async exec(message, { code }) { //Permet de tester du JavaScript
