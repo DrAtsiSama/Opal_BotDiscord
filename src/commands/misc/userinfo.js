@@ -22,7 +22,7 @@ class UserInfoCommand extends Command {
         return message.reply({
             embeds: [
                 this.client.functions.embed()
-                .setTitle(`${args.member.displayName} (${args.member.id})`)
+                .setTitle(`\`${args.member.displayName}\` (${args.member.id})`)
                 .setThumbnail(args.member.user.displayAvatarURL())
                 .setDescription(`Compte créé le : ${args.member.user.createdAt}`)
             ]
