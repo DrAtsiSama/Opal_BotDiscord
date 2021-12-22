@@ -2,7 +2,13 @@ const { Command } = require('discord-akairo');
 class EmbedCommand extends Command {
     constructor() {
         super('embed', {
-            aliases: ['embed']
+            category: 'Misc',
+            aliases: ['embed'],
+            description: {
+                content: `Affiche un embed.`,
+                usage: 'embed',
+                exemples: ['embed']
+            }
         });
     }
     exec(message) {

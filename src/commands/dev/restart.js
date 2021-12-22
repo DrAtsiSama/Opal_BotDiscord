@@ -2,8 +2,14 @@ const { Command } = require('discord-akairo');
 class RestartCommand extends Command {
     constructor() {
         super('restart', {
+            category: 'dev',
             aliases: ['restart', 'rs'],
-            ownerOnly: true
+            ownerOnly: true,
+            description: {
+                content: `Redemarre Opal.`,
+                usage: 'restart',
+                exemples: ['restart']
+            }
         });
     }
     exec(message) {
