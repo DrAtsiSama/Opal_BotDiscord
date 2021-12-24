@@ -15,17 +15,16 @@ class UserInfoCommand extends Command {
             ],
         });
     }
-    exec(message, args) {
-        const guildMember = args.member;
+    exec(message, { member }) {
         return message.channel.send({
             embeds: [
                 this.client.functions.embed()
-                .setAuthor(`\`${guildMember.displayName}\` (${guildMember.id})`, guildMember.user.displayAvatarURL())
+                .setAuthor(`\`${member.displayName}\` (${member.id})`, member.user.displayAvatarURL())
                 .setDescription(`
-                    Compte créé le : ${guildMember.user.createdAt}
-                    A rejoint le Discord le : ${guildMember.joinedAt}
-                    Bot : ${guildMember.user.bot}
-                    Role(s) : ${guildMember.roles.cache.map(role => role.name).join(', ')}
+                    Compte créé le : ${member.user.createdAt}
+                    A rejoint le Discord le : ${member.joinedAt}
+                    Bot : ${member.user.bot}
+                    Role(s) : ${member.roles.cache.map(role => role.name).join(', ')}
                 `)
             ]
         });
