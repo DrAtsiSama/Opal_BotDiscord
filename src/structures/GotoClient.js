@@ -46,6 +46,7 @@ module.exports = class GotoClient extends AkairoClient {
         /*Base de Données*/
     async init() {
         this.CommandHandler.useListenerHandler(this.listenerHandler); //Execute listenerHandler
+        this.listenerHandler.setEmitters({ CommandHandler: this.CommandHandler }); //Permet d'avoir les différents événement de CommandHandler
         await this.CommandHandler.loadAll(); //Chargement des commandes
         console.log(`Commandes -> ${this.CommandHandler.modules.size}`);
         await this.listenerHandler.loadAll(); //Chargement des événements
