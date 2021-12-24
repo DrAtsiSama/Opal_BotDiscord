@@ -44,11 +44,11 @@ module.exports = class GotoClient extends AkairoClient {
             this.guildSettings = new GuildsProvider();
         } //Constructor
         /*Base de Données*/
-    init() {
+    async init() {
         this.CommandHandler.useListenerHandler(this.listenerHandler); //Execute listenerHandler
-        this.CommandHandler.loadAll(); //Chargement des commandes
+        await this.CommandHandler.loadAll(); //Chargement des commandes
         console.log(`Commandes -> ${this.CommandHandler.modules.size}`);
-        this.listenerHandler.loadAll(); //Chargement des événements
+        await this.listenerHandler.loadAll(); //Chargement des événements
         console.log(`Evénements -> ${this.listenerHandler.modules.size}`);
     }
     async start() { //Methode asynchrone => 

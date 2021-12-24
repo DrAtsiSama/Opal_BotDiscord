@@ -2,10 +2,7 @@
     "name": "opal",
     "version": "1.0.0",
     "description": "Bot v13 (communautaire)",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+    "main": "src/index.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/DarekaSama/Opal_BotDiscord.git"
@@ -18,7 +15,9 @@
     },
     "homepage": "https://github.com/DarekaSama/Opal_BotDiscord#readme",
     "dependencies": {
-        "discord.js": "^13.0.0",
-        "discord-akairo": "github:SkyBlockDev/discord-akairo"
+        "common-tags": "^1.8.2",
+        "discord-akairo": "github:NotEnoughUpdates/discord-akairo#261013b",
+        "discord.js": "^13.1.0",
+        "mongoose": "^6.1.3"
     }
 }
