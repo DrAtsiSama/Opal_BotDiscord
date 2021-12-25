@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akairo');
+const { AkairoClient, CommandHandler, ListenerHandler, InhibitorHandler } = require('discord-akairo');
 const { TOKEN, MONGOSTRING } = require('../util/config');
 const { GuildsProvider } = require('../structures/Providers');
 const { embed } = require('../util/functions');
@@ -24,7 +24,7 @@ module.exports = class GotoClient extends AkairoClient {
                     intents: 32767 //Indique les événements que l'on peut recevoir (intents calculator ou écrire à la main)
                 }
             );
-            this.CommandHandler = new CommandHandler(this, {
+            this.commandHandler = new CommandHandler(this, {
                 allowMention: true,
                 prefix: async message => {
                     const guildPrefix = await this.guildSettings.get(message.guild);
@@ -32,11 +32,14 @@ module.exports = class GotoClient extends AkairoClient {
                     return config.prefix;
                 },
                 defaultCooldown: 2000, // 2000 ms => 2s
-                directory: './src/commands' //Localisation des commandes
+                directory: './src/commands/' //Localisation des commandes
             }); //Creation du handler
             this.listenerHandler = new ListenerHandler(this, {
-                directory: './src/listeners',
+                directory: './src/listeners/'
             }); //Creation des événements
+            this.inhibitorHandler = new InhibitorHandler(this, {
+                directory: './src/inhibitors/'
+            });
             //Creation des variables globales
             this.functions = {
                 embed: embed //this.client.functions.embed*
@@ -45,12 +48,17 @@ module.exports = class GotoClient extends AkairoClient {
         } //Constructor
         /*Base de Données*/
     async init() {
-        this.CommandHandler.useListenerHandler(this.listenerHandler); //Execute listenerHandler
-        this.listenerHandler.setEmitters({ CommandHandler: this.CommandHandler }); //Permet d'avoir les différents événement de CommandHandler
-        await this.CommandHandler.loadAll(); //Chargement des commandes
-        console.log(`Commandes -> ${this.CommandHandler.modules.size}`);
+        this.commandHandler.useListenerHandler(this.listenerHandler); //Execute listenerHandler
+        this.commandHandler.useInhibitorHandler(this.inhibitorHandler); //Execute inhibitor
+        this.listenerHandler.setEmitters({ commandHandler: this.commandHandler }); //Permet d'avoir les différents événement de commandHandler
+        await this.commandHandler.loadAll(); //Chargement des commandes
         await this.listenerHandler.loadAll(); //Chargement des événements
-        console.log(`Evénements -> ${this.listenerHandler.modules.size}`);
+        await this.inhibitorHandler.loadAll();
+        console.log(`
+            Commandes -> ${this.commandHandler.modules.size}
+            Evénements -> ${this.listenerHandler.modules.size}
+            Inhibiteurs -> ${this.inhibitorHandler.modules.size}
+        `);
     }
     async start() { //Methode asynchrone => 
             try {

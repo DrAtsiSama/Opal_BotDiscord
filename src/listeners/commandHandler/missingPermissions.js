@@ -2,7 +2,7 @@ const { Listener } = require('discord-akairo');
 class MissingPermissionsListener extends Listener {
     constructor() {
         super('missingPermissions', {
-            emitter: 'CommandHandler',
+            emitter: 'commandHandler',
             event: 'missingPermissions'
         });
     }
