@@ -9,9 +9,9 @@ class ChannelBlacklistInhibitor extends Inhibitor {
             }
         )
     }
-    exec(message) {
-        const channelBlacklist = ['790924649323954179'];
-        return channelBlacklist.includes(message.channel.id);
+    async exec(message) {
+        const channelBlacklist = await this.client.guildSettings.get(message.guild);
+        return channelBlacklist.blacklist.channels.includes(message.channel.id);
     }
 }
 module.exports = ChannelBlacklistInhibitor;
