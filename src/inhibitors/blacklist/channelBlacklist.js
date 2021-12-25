@@ -11,6 +11,8 @@ class ChannelBlacklistInhibitor extends Inhibitor {
     }
     async exec(message) {
         const channelBlacklist = await this.client.guildSettings.get(message.guild);
+        if (channelBlacklist == undefined) this.client.guildSettings.create(message.guild);
+        channelBlacklist = await this.client.guildSettings.get(message.guild);
         return channelBlacklist.blacklist.channels.includes(message.channel.id);
     }
 }
