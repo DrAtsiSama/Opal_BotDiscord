@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { AkairoClient, CommandHandler, ListenerHandler, InhibitorHandler } = require('discord-akairo');
 const { TOKEN, MONGOSTRING } = require('../util/config');
-const { GuildsProvider } = require('../structures/Providers');
+const { GuildsProvider, ModerationProvider } = require('../structures/Providers');
 const { embed } = require('../util/functions');
 module.exports = class GotoClient extends AkairoClient {
     constructor(config = {}) {
@@ -45,6 +45,7 @@ module.exports = class GotoClient extends AkairoClient {
                 embed: embed //this.client.functions.embed*
             }
             this.guildSettings = new GuildsProvider();
+            this.moderation = new ModerationProvider();
         } //Constructor
         /*Base de Données*/
     async init() {

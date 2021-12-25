@@ -6,8 +6,21 @@ const guildSchema = Schema({
     prefix: {
         type: String,
         default: '?'
+    },
+    blacklist: {
+        channels: [],
+        users: []
+    }
+});
+//Schema Moderation
+const moderationSchema = Schema({
+    id: { type: Number, default: 1 },
+    blacklist: {
+        guild: [],
+        users: []
     }
 });
 module.exports = {
-    Guild: model('Guild', guildSchema)
+    Guild: model('Guild', guildSchema),
+    Moderation: model('Moderation', moderationSchema),
 }
