@@ -2,7 +2,7 @@ const { Listener } = require('discord-akairo');
 class CooldownListener extends Listener {
     constructor() {
         super('cooldown', {
-            emitter: 'CommandHandler',
+            emitter: 'commandHandler',
             event: 'cooldown'
         });
     }
