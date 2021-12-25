@@ -9,7 +9,7 @@ class GuildBlacklistInhibitor extends Inhibitor {
             }
         )
     }
-    exec(message) {
+    async exec(message) {
         const GuildBlacklist = await this.client.moderation.get(message.guild);
         return GuildBlacklist.blacklist.guild.includes(message.guild.id);
     }
