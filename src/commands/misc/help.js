@@ -56,11 +56,13 @@ class HelpCommand extends Command {
         [help: Commande -> ${command.aliases[0]}] ${command.ownerOnly ? '[!] Commande utilisable seulement par les Administrateurs [!]' : '' }
         ------------
         ${command.description.content}
+        ${command.description.subCommand == '' || command.description.subCommand == undefined ? "Aucune sous-commande disponible" : `Sous-commandes: ${command.description.subCommand}`}
         Utilisation: ${prefix}${command.description.usage}
         Exemples: ${prefix}${command.description.exemples.join(` | ${prefix}`)}
         ------------
          ${prefix}  = prefix à utiliser sur le bot
         () = alias  
+        {} = sous-commande(s) disponible(s)
         <> = argument(s) optionnel(s)
         [] = argument(s) obligatoire
         📝 Ne pas inclure les carractères suivants dans vos commandes : [], () et <>
